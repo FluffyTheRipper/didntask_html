@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>didnt-ask.lol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       const phrases = [
         "Didn’t ask.",
@@ -34,9 +35,27 @@
         "didn’t ask bro",
         "Crazy… but didn’t ask."
       ];
+
+      function randomPhrase() {
+        const msg = document.getElementById("msg");
+        const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+        // Random bright-ish text color
+        const colors = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF", "#F72585"];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        msg.style.color = color;
+        msg.innerText = phrase;
+
+        // trigger wiggle animation
+        msg.classList.remove("wiggle");
+        void msg.offsetWidth; // reset animation
+        msg.classList.add("wiggle");
+      }
+
       window.onload = () => {
-        document.getElementById("msg").innerText =
-          phrases[Math.floor(Math.random() * phrases.length)];
+        randomPhrase();
+        document.body.addEventListener("click", randomPhrase);
       };
     </script>
     <style>
@@ -47,9 +66,22 @@
         height: 100vh;
         font-family: sans-serif;
         font-size: 3rem;
-        background-color: #748873;   /* page background */
-        color: #D1A980;              /* text color */
+        background-color: #111; /* dark meme backdrop */
         margin: 0;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .wiggle {
+        animation: wiggle 0.3s ease-in-out;
+      }
+
+      @keyframes wiggle {
+        0%   { transform: rotate(0deg); }
+        25%  { transform: rotate(3deg); }
+        50%  { transform: rotate(-3deg); }
+        75%  { transform: rotate(2deg); }
+        100% { transform: rotate(0deg); }
       }
     </style>
   </head>
