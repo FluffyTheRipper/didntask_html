@@ -79,6 +79,11 @@
         msg.classList.remove("wiggle");
         void msg.offsetWidth; // reset animation
         msg.classList.add("wiggle");
+
+        // play sound
+        const audio = document.getElementById("sfx");
+        audio.currentTime = 0; // rewind to start if clicked fast
+        audio.play();
       }
 
       window.onload = () => {
@@ -98,10 +103,11 @@
         margin: 0;
         text-align: center;
         cursor: pointer;
+        position: relative;
       }
 
-      .wiggle {
-        animation: wiggle 0.3s ease-in-out;
+      #msg {
+        max-width: 90%;
       }
 
       .footer {
@@ -111,6 +117,10 @@
         text-align: center;
         font-size: 0.8rem;
         color: #222; /* subtle grey */
+      }
+
+      .wiggle {
+        animation: wiggle 0.3s ease-in-out;
       }
 
       @keyframes wiggle {
@@ -125,6 +135,9 @@
   </head>
   <body>
     <div id="msg"></div>
-    <div class="footer">tom definitely didnt ask</div>
+    <div class="footer">tom defo didn't ask</div>
+
+    <!-- your audio file, must be in the repo (same folder as index.html) -->
+    <audio id="sfx" src="didnt_ask.mp3"></audio>
   </body>
 </html>
